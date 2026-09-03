@@ -115,40 +115,38 @@
       </label>
       <div class="container">
         <ul>
-          {% for item in nav_items %}
-            {% set is_active = (active_endpoint and item.endpoint == active_endpoint) %}
+          {%- for item in nav_items -%}
+            {%- set is_active = (active_endpoint and item.endpoint == active_endpoint) -%}
             <li class="{{ 'navigation__item--active' if is_active }} {% if item.children %}navigation__item--has-children{% endif %}">
-              {% if item.children %}
+              {%- if item.children -%}
                 <input type="checkbox"
                        id="navigation-sub-{{ item.endpoint }}"
                        class="navigation__item-toggle" />
-              {% endif %}
+              {%- endif -%}
               <span class="navigation__item">
-                {% if item.children %}
+                {%- if item.children -%}
                   <label class="navigation__item-icon"
                          for="navigation-sub-{{ item.endpoint }}">
                     {{ icon(name="chevron_down_black", size="sm") }}
                     {{ icon(name="chevron_down_white", size="sm") }}
                     <span class="govuk-visually-hidden">Toggle navigation</span>
                   </label>
-                {% endif %}
+                {%- endif -%}
                 {% call link(href=url(item.endpoint), variant="contrast", class_name=trackable_class_name("navigation " ~ item.label)) %}
                   <span class="navigation__item-label">{{ item.label }}</span>
                 {% endcall %}
               </span>
-              {% if item.children %}
+              {%- if item.children -%}
                 <ul>
-                  {% for child in item.children %}
+                  {%- for child in item.children -%}
                     <li>
-                      {% call link(href=url(child.endpoint), class_name=trackable_class_name("navigation " ~ child.label)) %}
-                        {{ child.label }}
-                      {% endcall %}
+                      {{ link(href=url(child.endpoint) , class_name=trackable_class_name("navigation " ~ child.label), content=child.label) }}
                     </li>
-                  {% endfor %}
+                  {%- endfor -%}
                 </ul>
-              {% endif %}
+              {%- endif -%}
             </li>
-          {% endfor %}
+          {%- endfor -%}
         </ul>
       </div>
     </div>

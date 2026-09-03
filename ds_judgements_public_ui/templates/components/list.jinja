@@ -1,4 +1,4 @@
-{% macro list(variant="default", padding="default", attrs={}) %}
+{%- macro list(variant="default", padding="default", attrs={}) -%}
   {% set variant_classes = {
     "default": "list list--default",
     "horizontal": "list list--horizontal",
@@ -15,11 +15,11 @@
   >
   {{ caller() }}
   </{{ variant_tag }}>
-{% endmacro %}
-{% macro list_item(content=None) %}
-  {% set body_content = caller() if caller is defined else content if content is defined else "" %}
+{%- endmacro -%}
+{%- macro list_item(content=None) -%}
+  {% set body_content = caller() if caller is defined else content if content is defined else "" | trim %}
   <li>{{ body_content }}</li>
-{% endmacro %}
+{%- endmacro -%}
 {% macro list_examples() %}
   {% call list() %}
     {{ list_item(content="Default list item 1") }}

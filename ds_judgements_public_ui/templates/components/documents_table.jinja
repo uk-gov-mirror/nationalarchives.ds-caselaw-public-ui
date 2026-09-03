@@ -1,25 +1,25 @@
 {% from "components/button.jinja" import button %}
-{% macro documents_table(title=None, headings=[], footer_button_url=None, footer_button_text=None, hide_title=False, margin=False) %}
+{%- macro documents_table(title=None, headings=[], footer_button_url=None, footer_button_text=None, hide_title=False, margin=False) -%}
   {% set margin_class = "documents-table--with-margins" if margin else "" %}
-  <div class="documents-table {{ margin_class }}">
+  <div class="{{ component_class_names('documents-table', margin_class) }}">
     <table>
       <thead>
         <tr>
-          {% if not hide_title %}
+          {%- if not hide_title -%}
             <th>
-              {% if title %}
+              {%- if title -%}
                 <h1>{{ title }}</h1>
-              {% else %}
+              {%- else -%}
                 <span class="govuk-visually-hidden">Documents</span>
-              {% endif %}
+              {%- endif -%}
             </th>
-          {% endif %}
-          {% for heading in headings %}<th>{{ heading }}</th>{% endfor %}
+          {%- endif -%}
+          {%- for heading in headings -%}<th>{{ heading }}</th>{%- endfor -%}
         </tr>
       </thead>
       {{ caller() }}
     </table>
-    {% if footer_button_url and footer_button_text %}
+    {%- if footer_button_url and footer_button_text -%}
       <div class="documents-table__footer">
         {% call button(href=footer_button_url) %}
           {{ footer_button_text }}
@@ -27,27 +27,27 @@
       </div>
     {% endif %}
   </div>
-{% endmacro %}
-{% macro document_table_body() %}
+{%- endmacro -%}
+{%- macro document_table_body() -%}
   <tbody>
     {{ caller() }}
   </tbody>
-{% endmacro %}
-{% macro document_table_row() %}
+{%- endmacro -%}
+{%- macro document_table_row() -%}
   <tr>{{ caller() }}</tr>
-{% endmacro %}
-{% macro document_table_cell(label=None, variant="default", colspan=None) %}
-  <td {% if colspan %}colspan="{{ colspan }}"{% endif %}>
-    {% if label %}<span class="documents-table__label">{{ label }}</span>{% endif %}
+{%- endmacro -%}
+{%- macro document_table_cell(label=None, variant="default", colspan=None) -%}
+  <td {%- if colspan -%}colspan="{{ colspan }}"{%- endif -%}>
+    {%- if label -%}<span class="documents-table__label">{{ label }}</span>{%- endif -%}
     {{ caller() }}
   </td>
-{% endmacro %}
-{% macro document_table_matches() %}
+{%- endmacro -%}
+{%- macro document_table_matches() -%}
   <div class="documents-table__matches">{{ caller() }}</div>
-{% endmacro %}
-{% macro document_table_highlight() %}
+{%- endmacro -%}
+{%- macro document_table_highlight() -%}
   <div class="documents-table__highlight">{{ caller() }}</div>
-{% endmacro %}
+{%- endmacro -%}
 {% macro documents_table_examples() %}
   <h3>Homepage example</h3>
   {% call documents_table(title="Recently published judgments", headings=["Neutral citation", "Handed down"]) %}

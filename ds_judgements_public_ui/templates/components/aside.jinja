@@ -1,11 +1,11 @@
-{% macro aside() %}
+{%- macro aside() -%}
   <aside>
     {{ caller() }}
   </aside>
-{% endmacro %}
-{% macro aside_container() %}
+{%- endmacro -%}
+{%- macro aside_container() -%}
   <div class="aside-container">{{ caller() }}</div>
-{% endmacro %}
+{%- endmacro -%}
 {% macro aside_examples() %}
   {% call aside_container() %}
     <div>Content</div>
