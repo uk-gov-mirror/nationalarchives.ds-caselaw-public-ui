@@ -1,10 +1,10 @@
 {%- macro aside() -%}
   <aside>
-    {{ caller() }}
+    {{ caller() | trim }}
   </aside>
 {%- endmacro -%}
 {%- macro aside_container() -%}
-  <div class="aside-container">{{ caller() }}</div>
+  <div class="aside-container">{{ caller() | trim }}</div>
 {%- endmacro -%}
 {% macro aside_examples() %}
   {% call aside_container() %}
